@@ -1,0 +1,11 @@
+.listul{
+    display: flex;
+    list-style-type: none;
+    margin: auto;
+    gap: 5rem;
+}
+
+.listul a{
+    color: white;
+    text-decoration: none;
+}

@@ -1,0 +1,27 @@
+.title{
+    background-color: #777;
+    margin-top: 8vh;
+    display: flex;
+    flex-direction: column;
+   align-items: center;
+   padding: 15px;
+   height: 30vh;
+}
+.text{
+    text-align: center;
+    font-size: 5rem;
+    color: white;
+}
+.btn{
+    background-color: transparent;
+    border: 1px solid  #56CCF2;
+    color: white;
+    padding: 10px 10px;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+}
+.body{
+    width: 60vw;
+    margin-top: 5vh;
+}

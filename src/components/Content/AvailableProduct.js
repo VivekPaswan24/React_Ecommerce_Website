@@ -29,9 +29,9 @@ const AvailableProduct = (props) => {
     <React.Fragment>
       <Container>
         <h1 style={{textAlign:'center'}}>Music</h1>
-        <Row className="gy-5">
+        <Row >
             {productArr.map((item)=>{
-               return <Product title={item.title} price={item.price} imageUrl={item.imageUrl} />
+               return <Product key={item.title} title={item.title} price={item.price} imageUrl={item.imageUrl} />
             })}
         </Row>
       </Container>

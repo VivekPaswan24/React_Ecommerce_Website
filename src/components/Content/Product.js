@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Card, Col } from "react-bootstrap";
+import CartContext from "../store/cart-context";
 import "./Product.css";
 
 const Product = (props) => {
+  const cartCtx=useContext(CartContext)
+
+  const addProductToCartHandler=()=>{
+    cartCtx.addProduct({...props,quantity:1})
+  }
   return (
     <Col className="col-6">
       <Card className='card'>
@@ -14,7 +20,7 @@ const Product = (props) => {
         />
         <div className="bottom">
           <Card.Text>{`$${props.price}`}</Card.Text>
-          <Button>Add To Cart</Button>
+          <Button className="btn-sm" onClick={addProductToCartHandler}>Add To Cart</Button>
         </div>
       </Card>
     </Col>
