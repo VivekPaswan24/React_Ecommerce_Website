@@ -4,6 +4,7 @@ import AvailableProduct from "../components/Content/AvailableProduct";
 import Cart from "../components/Cart/Cart";
 import { useState } from "react";
 import CartProvider from "../components/store/CartProvider";
+import HeaderCartButton from "../components/Header/HeaderCartButton";
 
 const StorePage = () => {
   const [showCart, setShowCart] = useState(false);
@@ -15,7 +16,8 @@ const StorePage = () => {
   }
   return (
     <CartProvider>
-      <Header onClick={cartShowHandler} />
+      <Header/>
+      <HeaderCartButton onClick={cartShowHandler} />
       <AvailableProduct />
       {showCart && <Cart onClick={cartHideHandler} />}
     </CartProvider>

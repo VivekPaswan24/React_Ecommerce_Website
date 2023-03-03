@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Button, Badge } from "react-bootstrap";
 import CartContext from "../store/cart-context";
+import classes from './HeaderCartButton.module.css'
 
 const HeaderCartButton = (props) => {
   const cartCtx = useContext(CartContext);
@@ -11,7 +12,7 @@ const HeaderCartButton = (props) => {
   return (
     <Button
       variant="dark"
-      className="border border-3 border-info"
+      className={classes.cartButton}
       onClick={props.onClick}
     >
       Cart

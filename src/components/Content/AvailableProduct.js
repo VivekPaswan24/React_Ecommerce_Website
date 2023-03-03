@@ -29,7 +29,7 @@ const AvailableProduct = (props) => {
     <React.Fragment>
       <Container>
         <h1 style={{textAlign:'center'}}>Music</h1>
-        <Row >
+        <Row className="gy-5">
             {productArr.map((item)=>{
                return <Product key={item.title} title={item.title} price={item.price} imageUrl={item.imageUrl} />
             })}

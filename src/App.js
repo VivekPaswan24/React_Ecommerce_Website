@@ -1,25 +1,36 @@
 import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Route } from "react-router-dom";
 import "./App.css";
+import Footer from "./components/Footer/Footer";
+import MainNaviGation from "./components/Header/MainNaviGation";
 import AboutUs from "./Pages/AboutUs";
 import Home from "./Pages/Home";
-import RootLayout from "./Pages/Root";
 import StorePage from "./Pages/Store";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <RootLayout />,
-    children: [
-      { path: "/", element: <StorePage /> },
-      { path: "/AboutUs", element: <AboutUs /> },
-      { path: "/Home", element: <Home /> },
-    ],
-  },
-]);
+import ContactUs from "./Pages/ContactUs";
 
 function App() {
-  return <RouterProvider router={router} />;
+  return <div>
+    <header>
+      <MainNaviGation/>
+    </header>
+    <main>
+      <Route path='/store' >
+        <StorePage/>
+      </Route>
+      <Route path='/aboutUs' >
+        <AboutUs/>
+      </Route>
+      <Route path='/home'>
+        <Home/>
+      </Route>
+      <Route path='/contactUs'>
+        <ContactUs/>
+      </Route>
+    </main>
+    <footer>
+      <Footer/>
+    </footer>
+  </div>
 }
 
 export default App;
