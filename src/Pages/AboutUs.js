@@ -6,9 +6,9 @@ const AboutUs = () => {
   return (
     <>
       <HeaderTitle />
-      <Container className="mt-4">
+      <Container>
         <h1 style={{textAlign:'center'}}>ABOUT</h1>
-        <div className="d-flex">
+        <Container className="d-flex">
           <Image
             height={200}
             width={200}
@@ -44,7 +44,7 @@ const AboutUs = () => {
             take the hardships of the life of harsh condemn, we are accusing
             him? Him whom something large cisterns.
           </p>
-        </div>
+        </Container>
       </Container>
     </>
   );

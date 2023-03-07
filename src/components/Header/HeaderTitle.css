@@ -1,6 +1,13 @@
 .header-title{
-    height: 25vh;
     background-color: #777;
     text-align: center;
     margin-top: 8vh;
+    padding: 8vh;
+}
+
+.homeButton{
+    padding:2vh;
+    font-size:1.5rem;
+    background-color:transparent;
+    border:1px solid rgb(86, 204, 242);
 }

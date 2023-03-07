@@ -1,6 +1,6 @@
 import React from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
-import classes from "./Home.module.css";
+import {Button, Row,Col,Container} from "react-bootstrap";
+import HeaderTitle from "../components/Header/HeaderTitle";
 
 const tourDetaisl = [
   {
@@ -37,44 +37,37 @@ const tourDetaisl = [
 
 const Home = () => {
   return (
-    <>
-      <div className={classes.title}>
+    <React.Fragment>
+      <HeaderTitle home={true}/>
+      <Container>
         <div>
-          <h1 className={classes.text}>The Generics</h1>
+          <h1 style={{textAlign:'center'}}>TOURS</h1>
         </div>
-        <div>
-          <button type="click" className={classes.btn}>
-            Get Our Latest Album
-          </button>
-        </div>
-      </div>
-      <Container className="mt-5">
-        <h1 style={{ textAlign: "center" }}>TOURS</h1>
-        <Container className={classes.body}>
-          {tourDetaisl.map((ele) => {
-            return (
-              <Row className="border-bottom" key={ele.date}>
-                <Col>
-                  <span>{ele.date}</span>
-                </Col>
-                <Col>
-                  <span>{ele.title}</span>
-                </Col>
-                <Col>
-                  <span>{ele.des}</span>
-                </Col>
-                <Col>
-                  <Button variant="primary" size="md" active>
-                    BUY TICKETS
-                  </Button>
-                </Col>
-              </Row>
-            );
-          })}
-        </Container>
+        <Container className="ms-5 mx-5">
+        {
+          tourDetaisl.map((ele)=>{
+           return (
+            <Row className="mt-2">
+              <Col>
+              <span>{ele.date}</span>
+              </Col>
+              <Col>
+              <span>{ele.title}</span>
+              </Col>
+              <Col>
+              <span>{ele.des}</span>
+              </Col>
+              <Col>
+              <span><Button>BUY TICKETS</Button></span>
+              </Col>
+            </Row>
+           )
+          })
+        }
+       </Container>
       </Container>
-    </>
-  );
+    </React.Fragment>
+  )
 };
 
 export default Home;

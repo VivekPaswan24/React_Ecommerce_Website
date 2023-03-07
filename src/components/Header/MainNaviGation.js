@@ -5,24 +5,37 @@ import classes from "./MainNaviGation.module.css";
 
 const MainNaviGation = (props) => {
   return (
-      <Navbar bg="dark" variant="dark" className="border-bottom fixed-top" style={{height:'8vh'}}>
-        <Container fluid>
-          <ul className={classes.listul}>
-            <li>
-              <NavLink to="/home">HOME</NavLink>
-            </li>
-            <li>
-              <NavLink to="/store">STORE</NavLink>
-            </li>
-            <li>
-              <NavLink to="/aboutUs">ABOUT</NavLink>
-            </li>
-            <li>
-              <NavLink to="/contactUs">CONTACT US</NavLink>
-            </li>
-          </ul>
-        </Container>
-      </Navbar>
+    <Navbar
+      bg="dark"
+      variant="dark"
+      className="border-bottom fixed-top"
+      style={{ height: "8vh" }}
+    >
+      <Container fluid>
+        <ul className={classes.listul}>
+          <li>
+            <NavLink activeClassName={classes.active} to="/home">
+              HOME
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/store"  activeClassName={classes.active}  >
+              STORE
+            </NavLink>
+          </li>
+          <li>
+            <NavLink activeClassName={classes.active} to="/aboutUs">
+              ABOUT
+            </NavLink>
+          </li>
+          <li>
+            <NavLink activeClassName={classes.active} to="/contactUs">
+              CONTACT US
+            </NavLink>
+          </li>
+        </ul>
+      </Container>
+    </Navbar>
   );
 };
 

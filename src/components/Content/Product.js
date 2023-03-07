@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Button, Card, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import CartContext from "../store/cart-context";
 import "./Product.css";
 
@@ -12,7 +13,7 @@ const Product = (props) => {
   return (
     <Col className="col-6">
       <Card className='card'>
-        <Card.Title className="title">{props.title}</Card.Title>
+        <Card.Title className="title"><Link to={`/store/${props.id}`}>{props.title}</Link></Card.Title>
         <Card.Img
           style={{ width: "90%", margin: "auto" }}
           variant="top"

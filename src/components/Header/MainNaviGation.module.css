@@ -9,3 +9,9 @@
     color: white;
     text-decoration: none;
 }
+
+.listul a:hover,
+.listul a:active,
+.listul a.active{
+    text-decoration: underline;
+}
