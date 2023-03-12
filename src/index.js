@@ -8,12 +8,15 @@ import { BrowserRouter } from 'react-router-dom';
 // React Bootstrap Configuration
 import '../node_modules/bootstrap/dist/js/bootstrap.min.js'
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+import AuthProvider from './components/store/AurhProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <AuthProvider>
   <BrowserRouter>
     <App />
   </BrowserRouter>
+  </AuthProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

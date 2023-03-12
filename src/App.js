@@ -8,6 +8,7 @@ import Home from "./Pages/Home";
 import StorePage from "./Pages/Store";
 import ContactUs from "./Pages/ContactUs";
 import ProductDetails from "./Pages/ProductDetails";
+import Login from "./Pages/Login";
 
 function App() {
   return (
@@ -31,6 +32,9 @@ function App() {
           </Route>
           <Route path="/contactUs">
             <ContactUs />
+          </Route>
+          <Route path='/login'>
+            <Login/>
           </Route>
           <Route path="/store/:productId">
             <ProductDetails />
