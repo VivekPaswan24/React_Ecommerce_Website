@@ -33,7 +33,8 @@ const AuthForm = () => {
             returnSecureToken: true,
           }
         );
-        authctx.login(response.data.idToken);
+        authctx.login(response.data.idToken,response.data.email);
+        console.log(response.data)
         setRequest(false);
         history.replace("/store");
       } catch (error) {

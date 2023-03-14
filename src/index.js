@@ -8,7 +8,7 @@ import { BrowserRouter } from 'react-router-dom';
 // React Bootstrap Configuration
 import '../node_modules/bootstrap/dist/js/bootstrap.min.js'
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
-import AuthProvider from './components/store/AurhProvider';
+import AuthProvider from './components/store/AuthProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

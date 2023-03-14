@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Footer from "./components/Footer/Footer";
@@ -9,8 +9,11 @@ import StorePage from "./Pages/Store";
 import ContactUs from "./Pages/ContactUs";
 import ProductDetails from "./Pages/ProductDetails";
 import Login from "./Pages/Login";
+import AuthContext from "./components/store/auth-context";
 
 function App() {
+
+  const authctx=useContext(AuthContext);
   return (
     <div>
       <header>
@@ -19,10 +22,12 @@ function App() {
       <main>
         <Switch>
           <Route path="/" exact>
-            <Redirect to="/store" />
+            {authctx.isLoggedIn && <Redirect to="/store" />}
+            {!authctx.isLoggedIn && <Redirect to='/login'/>}
           </Route>
           <Route path="/store" exact>
-            <StorePage />
+            {authctx.isLoggedIn && <StorePage />}
+            {!authctx.isLoggedIn && <Redirect to='/login'/>}
           </Route>
           <Route path="/aboutUs">
             <AboutUs />

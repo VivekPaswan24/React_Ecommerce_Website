@@ -10,26 +10,22 @@ const AuthProvider = (props) => {
       if(token){
         setTimeout(()=>{
           localStorage.removeItem('token')
+          localStorage.removeItem('email')
         },1000*60*5)
       }
     },[token])
 
-    const login=(token)=>{
+    const login=(token,email)=>{
         setToken(token)
         localStorage.setItem('token',token)
+        localStorage.setItem('email',email)
     }
     
-    const logut=()=>{
-        setToken(null)
-        localStorage.removeItem('token')
-    }
-
     
   const authContext = {
     token: token,
     isLoggedIn:isLoggedIn,
     login:login,
-    logout:logut,
   };
   return (
     <AuthContext.Provider value={authContext}>

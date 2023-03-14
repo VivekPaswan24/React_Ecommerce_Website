@@ -47,7 +47,7 @@ const Home = () => {
         {
           tourDetaisl.map((ele)=>{
            return (
-            <Row className="mt-2">
+            <Row className="mt-2" key={ele.date}>
               <Col>
               <span>{ele.date}</span>
               </Col>

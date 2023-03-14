@@ -1,9 +1,12 @@
 import React from "react";
-import { Navbar, Container } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+
+import { Navbar, Container, } from "react-bootstrap";
+
+import { NavLink} from "react-router-dom";
 import classes from "./MainNaviGation.module.css";
 
 const MainNaviGation = (props) => {
+
   return (
     <Navbar
       bg="dark"
