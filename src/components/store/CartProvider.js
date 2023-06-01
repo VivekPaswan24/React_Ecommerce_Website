@@ -1,8 +1,8 @@
 import axios from "axios";
-import React, { useState,useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CartContext from "./cart-context";
 
-const crudURL = "https://crudcrud.com/api/bc7f8d411cb849d6b1c37139df99819f";
+const crudURL = "https://crudcrud.com/api/8a5df6e96151494a911bcb44f427fde9";
 
 async function addItemTocrud(obj) {
   const email = localStorage.getItem("email");
@@ -10,7 +10,7 @@ async function addItemTocrud(obj) {
   try {
     let response = await axios.post(`${crudURL}/cart${updatedEmail}`, obj);
     alert("Item Added Successfully");
-    return response;
+    return response.data;
   } catch (error) {
     console.log(error);
   }
@@ -20,9 +20,8 @@ async function putItemToCrud(id, obj) {
   const email = localStorage.getItem("email");
   const updatedEmail = email.replace("@", "").replace(".", "");
   try {
-    let response = await axios.put(`${crudURL}/cart${updatedEmail}/${id}`, obj);
+    await axios.put(`${crudURL}/cart${updatedEmail}/${id}`, obj);
     alert("put done");
-    return response;
   } catch (error) {
     console.log(error);
   }
@@ -40,14 +39,14 @@ async function deleteItemFromCrud(id) {
   }
 }
 
-async function getItemFromCrud(){
+async function getItemFromCrud() {
   const email = localStorage.getItem("email");
   const updatedEmail = email.replace("@", "").replace(".", "");
-  try{
-    const response=await axios.get(`${crudURL}/cart${updatedEmail}`)
-    return response
-  }catch(error){
-    console.log(error)
+  try {
+    const response = await axios.get(`${crudURL}/cart${updatedEmail}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
   }
 }
 
@@ -55,68 +54,79 @@ const CartProvider = (props) => {
   const [products, setProducts] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
 
-  useEffect(()=>{
-   async function fetchDta(){
-    const response=await getItemFromCrud()
-    const totalAmount=response.data.reduce((curAmount,item)=>{
-       return curAmount=curAmount+item.price*item.quantity
-    },0)
-    setTotalAmount(totalAmount)
-    setProducts(response.data)
-   }
-   fetchDta()
-  },[])
+  useEffect(() => {
+    async function fetchDta() {
+      const data = await getItemFromCrud();
+      const totalAmount = data.reduce((curAmount, item) => {
+        return (curAmount = curAmount + item.price * item.quantity);
+      }, 0);
+      setProducts(data);
+      setTotalAmount(totalAmount);
+    }
+    fetchDta();
+  }, []);
 
   const addProductToCartHandler = async (item) => {
-    let updatedProducts;
     const existingItemIndex = products.findIndex(
       (ele) => ele.title === item.title
     );
     const existingItem = products[existingItemIndex];
     if (existingItem) {
+      const id = existingItem._id;
       const updatedProduct = {
         ...existingItem,
         quantity: Number(existingItem.quantity) + 1,
       };
-      const id = existingItem._id;
-      updatedProducts = [...products];
-      updatedProducts[existingItemIndex] = updatedProduct;
-      delete updatedProduct._id
+      delete updatedProduct._id;
       await putItemToCrud(id, updatedProduct);
-      
+      setProducts((prevProducts) => {
+        const updatedProducts = [...prevProducts];
+        updatedProducts[existingItemIndex] = {
+          ...updatedProduct,
+          _id: id,
+        };
+        return updatedProducts;
+      });
     } else {
-      let response = await addItemTocrud(item);
-      updatedProducts = products.concat({ ...item, _id: response.data._id });
+      const data = await addItemTocrud(item);
+      setProducts((prevProducts) => {
+        const updatedProducts = prevProducts.concat(data);
+        return updatedProducts;
+      });
     }
-    setProducts(updatedProducts);
     setTotalAmount((prevAmount) => {
-      prevAmount = prevAmount + item.price;
-      return prevAmount;
+      return (prevAmount = prevAmount + item.price);
     });
   };
-
-  const removeProductFromCart = async (item) => {
-    let updatedProducts;
+  const removeProductFromCart = async (item, id) => {
+    console.log(id);
     const quantity = Number(item.quantity);
     if (quantity === 1) {
-      await deleteItemFromCrud(item._id);
-      updatedProducts = products.filter((ele) => ele.title !== item.title);
+      await deleteItemFromCrud(id);
+      setProducts((prevProducts) => {
+        const updatedProducts = prevProducts.filter(
+          (ele) => ele.id !== item.id
+        );
+        return updatedProducts;
+      });
     } else {
-      const existingItemIndex = products.findIndex(
-        (ele) => ele.title === item.title
-      );
+      const existingItemIndex = products.findIndex((ele) => ele.id === item.id);
       const existingItem = products[existingItemIndex];
-      const id = existingItem._id;
       let updatedProduct = {
         ...existingItem,
         quantity: Number(existingItem.quantity) - 1,
       };
-      updatedProducts = [...products];
-      updatedProducts[existingItemIndex] = updatedProduct;
-      delete updatedProduct._id
+      delete updatedProduct._id;
       await putItemToCrud(id, updatedProduct);
+      setProducts((prevProducts) => {
+        const updatedProducts = [...prevProducts];
+        updatedProducts[existingItemIndex] = {
+          ...updatedProduct,
+          _id: id,
+        };
+        return updatedProducts;
+      });
     }
-    setProducts(updatedProducts);
     setTotalAmount((prevAmount) => {
       prevAmount = prevAmount - item.price;
       return prevAmount;

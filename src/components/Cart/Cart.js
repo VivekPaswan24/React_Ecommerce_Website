@@ -6,8 +6,8 @@ import "./Cart.css";
 const Cart = (props) => {
   const cartCtx=useContext(CartContext);
 
-  const productRemoveHandler=(item)=>{
-    cartCtx.removeProduct(item)
+  const productRemoveHandler=(item,id)=>{
+    cartCtx.removeProduct(item,id)
   }
 
   return (
@@ -42,7 +42,7 @@ const Cart = (props) => {
                         <span>x{item.quantity}</span>
                         </Col>
                         <Col className="col-2">
-                       <Button variant="danger" className="btn-sm" onClick={productRemoveHandler.bind(null,item)}>Remove</Button>
+                       <Button variant="danger" className="btn-sm" onClick={productRemoveHandler.bind(null,item,item._id)}>Remove</Button>
                         </Col>
                     </Row>
                 })

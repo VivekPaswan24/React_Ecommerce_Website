@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 
-import { Navbar, Container, } from "react-bootstrap";
+import { Navbar, Container, Button, } from "react-bootstrap";
 
 import { NavLink} from "react-router-dom";
+import AuthContext from "../store/auth-context";
 import classes from "./MainNaviGation.module.css";
 
 const MainNaviGation = (props) => {
 
+  const logutHandler=()=>{
+    authCtx.logout()
+  }
+
+  const authCtx=useContext(AuthContext);
   return (
     <Navbar
       bg="dark"
@@ -41,6 +47,9 @@ const MainNaviGation = (props) => {
               LOGIN
             </NavLink>
           </li>
+          {authCtx.isLoggedIn && <li>
+            <Button onClick={logutHandler}>LOGOUT</Button>
+          </li>}
         </ul>
       </Container>
     </Navbar>

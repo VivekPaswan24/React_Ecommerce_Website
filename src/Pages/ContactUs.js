@@ -16,6 +16,7 @@ const ContactUs = (props) => {
         }
         try{
          await axios.post('https://react-http-71f81-default-rtdb.firebaseio.com/report.json',{details})
+         alert('Report successfully added')
          enteredName.current.value=''
          enteredEmail.current.value=''
          enteredPhone.current.value=''
